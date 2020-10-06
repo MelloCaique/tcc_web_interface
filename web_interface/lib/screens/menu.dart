@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_interface/data/data.dart';
 import 'package:web_interface/services/cadastro.dart';
 import 'package:web_interface/services/receitas.dart';
 
@@ -12,13 +13,16 @@ class Menu extends StatefulWidget {
 class _MenuState extends State<Menu> {
   int _selectedIndex = 0;
 
-  static List<Widget> tabWidgetsDI = <Widget>[Cadastro(), Receitas()];
+  static List<Widget> tabWidgetsDI = <Widget>[Receitas(), Cadastro()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Receituário Eletrônico"),
+        title: Text(
+          "Receituário Eletrônico",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
         leading: IconButton(
             icon: Icon(Icons.exit_to_app),
@@ -26,10 +30,9 @@ class _MenuState extends State<Menu> {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Login()));
             }),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Container(
-        //color: Colors.blueGrey.withOpacity(0.2),
         child: Center(
             child: Column(
           children: [
@@ -47,7 +50,7 @@ class _MenuState extends State<Menu> {
                             padding: const EdgeInsets.all(8.0),
                             child: Center(
                               child: Text(
-                                "Consultório A",
+                                "$instituicao",
                                 style: textStyle(),
                               ),
                             ),
@@ -170,16 +173,16 @@ class _MenuState extends State<Menu> {
         unselectedItemColor: Colors.black,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.app_registration),
+            icon: Icon(Icons.dashboard),
             title: Text(
-              'Cadastro',
+              'Banco de Receitas',
               style: TextStyle(fontWeight: FontWeight.w600),
             ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
+            icon: Icon(Icons.app_registration),
             title: Text(
-              'Banco de Receitas',
+              'Cadastro',
               style: TextStyle(fontWeight: FontWeight.w600),
             ),
           )

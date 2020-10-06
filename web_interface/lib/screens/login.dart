@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:web_interface/data/data.dart';
 import 'package:web_interface/screens/menu.dart';
+import 'package:web_interface/themes/custom_theme.dart';
+import 'package:web_interface/themes/my_themes.dart';
 import 'package:web_interface/widgets/text_input.dart';
 
 class Login extends StatefulWidget {
@@ -10,7 +13,25 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final _passwordController = new TextEditingController();
+  var dropDownValue;
+  void _changeTheme(BuildContext buildContext, MyThemeKeys key) {
+    CustomTheme.instanceOf(buildContext).changeTheme(key);
+  }
+
   acesso() {
+    instituicao = dropDownValue;
+    if (instituicao == "Consultório A") {
+      port = "10055";
+      host = "191.232.160.49";
+    }
+    if (instituicao == "Farmácia A") {
+      port = "10056";
+      host = "52.177.205.133";
+    }
+    if (instituicao == "Farmácia B") {
+      port = "10057";
+      host = "52.177.206.117";
+    }
     Navigator.push(context, MaterialPageRoute(builder: (context) => Menu()));
   }
 
@@ -63,9 +84,15 @@ class _LoginState extends State<Login> {
                                     child: Padding(
                                   padding: const EdgeInsets.all(1.0),
                                   child: Container(
-                                    child: Text(
-                                      "Consultório A",
-                                      style: textStyle(),
+                                    child: Container(
+                                      child: (dropDownValue == null)
+                                          ? Text(
+                                              '',
+                                            )
+                                          : Text(
+                                              "$dropDownValue",
+                                              style: textStyle(),
+                                            ),
                                     ),
                                   ),
                                 )),
@@ -82,8 +109,56 @@ class _LoginState extends State<Login> {
                                   children: <Widget>[
                                     Flexible(
                                       flex: 3,
-                                      child: Container(
-                                        color: Colors.red,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5),
+                                        child: new PhysicalModel(
+                                            color: Colors.white,
+                                            shadowColor: Colors.black,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            elevation: 0,
+                                            child: DropdownButtonFormField(
+                                              hint: Text('SELECIONE O BANCO'),
+                                              value: dropDownValue,
+                                              icon: Icon(Icons.arrow_downward),
+                                              iconSize: 20,
+                                              isExpanded: true,
+                                              elevation: 5,
+                                              items: <String>[
+                                                'Consultório A',
+                                                'Farmácia A',
+                                                'Farmácia B',
+                                              ].map<DropdownMenuItem<String>>(
+                                                  (String value) {
+                                                return DropdownMenuItem<String>(
+                                                    value: value,
+                                                    child: Text(value));
+                                              }).toList(),
+                                              validator: (value) => value ==
+                                                      null
+                                                  ? '    Inválido: Organização não preenchida'
+                                                  : null,
+                                              onChanged: (newValue) {
+                                                if (newValue ==
+                                                    'Consultório A') {
+                                                  _changeTheme(
+                                                      context,
+                                                      MyThemeKeys
+                                                          .CONSULTORIO_A);
+                                                }
+                                                if (newValue == 'Farmácia A') {
+                                                  _changeTheme(context,
+                                                      MyThemeKeys.FARMACIA_A);
+                                                }
+                                                if (newValue == 'Farmácia B') {
+                                                  _changeTheme(context,
+                                                      MyThemeKeys.FARMACIA_B);
+                                                }
+                                                setState(() {
+                                                  dropDownValue = newValue;
+                                                });
+                                              },
+                                            )),
                                       ),
                                     ),
                                   ],

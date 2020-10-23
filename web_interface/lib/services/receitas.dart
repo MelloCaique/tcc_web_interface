@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:web_interface/api/api.dart';
+import 'package:web_interface/data/data.dart';
 import 'package:web_interface/widgets/card_dash.dart';
 
 class Receitas extends StatefulWidget {
@@ -221,15 +223,16 @@ class _ReceitasState extends State<Receitas> {
                     Flexible(
                       flex: 8,
                       child: Container(
-                        child: ListView.builder(itemBuilder: (_, index) {
-                          return GestureDetector(
-                            //Tratar os dados e passar para a lista.
-                            child: CardDash("$index", "12/10/2020", "Caique",
-                                "Sibutramina"),
-                            //Tratar os dados e passar para a receita completa.
-                            onTap: () => showDetails(index),
-                          );
-                        }),
+                        child: updateList(),
+                        // ListView.builder(itemBuilder: (_, index) {
+                        //   return GestureDetector(
+                        //     //Tratar os dados e passar para a lista.
+                        //     child: CardDash("$index", "12/10/2020", "Caique",
+                        //         "Sibutramina"),
+                        //     //Tratar os dados e passar para a receita completa.
+                        //     onTap: () => showDetails(index),
+                        //   );
+                        // }),
                       ),
                     ),
                   ],
@@ -256,6 +259,36 @@ class _ReceitasState extends State<Receitas> {
         )
       ],
     );
+  }
+
+  Widget updateList() {
+    return new FutureBuilder(
+        future: ApiCollection(host, port).getMyReceitas(),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.hasData) {
+            var content = snapshot.data;
+            var _counter = content.length;
+            var index;
+            return Scrollbar(
+              child: ListView.builder(
+                  physics: index,
+                  itemCount: _counter,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      children: [
+                        GestureDetector(
+                          child: Text(content[index].toString()),
+                          onTap: () => showDetails(index),
+                        ),
+                        Divider(),
+                      ],
+                    );
+                  }),
+            );
+          } else {
+            return Text("Buscando Informações no ledger");
+          }
+        });
   }
 
   textStyleTitulo() {

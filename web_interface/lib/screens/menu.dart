@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:web_interface/data/data.dart';
 import 'package:web_interface/services/cadastro.dart';
 import 'package:web_interface/services/receitas.dart';
+import 'package:web_interface/widgets/receitas_buttom.dart';
 
 import 'login.dart';
 
@@ -68,26 +69,7 @@ class _MenuState extends State<Menu> {
                             Flexible(
                               flex: 1,
                               child: GestureDetector(
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width * 1,
-                                  height:
-                                      MediaQuery.of(context).size.height * 1,
-                                  decoration: BoxDecoration(
-                                    color: Colors.yellow,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(30),
-                                        topRight: Radius.circular(30)),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(2.0),
-                                    child: Center(
-                                      child: Text(
-                                        "Amarela",
-                                        style: textStyleCards(),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                child: ReceitasButtom("Amarela", Colors.yellow),
                                 onTap: () {
                                   // botão receituário
                                 },
@@ -99,25 +81,7 @@ class _MenuState extends State<Menu> {
                             Flexible(
                               flex: 1,
                               child: GestureDetector(
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width * 1,
-                                  height:
-                                      MediaQuery.of(context).size.height * 1,
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(30),
-                                        topRight: Radius.circular(30)),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(2.0),
-                                    child: Center(
-                                        child: Text(
-                                      "Azul",
-                                      style: textStyleCards(),
-                                    )),
-                                  ),
-                                ),
+                                child: ReceitasButtom("Azul", Colors.blue),
                                 onTap: () {
                                   // Botão Rceituário
                                 },
@@ -129,25 +93,8 @@ class _MenuState extends State<Menu> {
                             Flexible(
                               flex: 1,
                               child: GestureDetector(
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width * 1,
-                                  height:
-                                      MediaQuery.of(context).size.height * 1,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(30),
-                                        topRight: Radius.circular(30)),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(2.0),
-                                    child: Center(
-                                        child: Text(
-                                      "Branca",
-                                      style: textStyleCards(),
-                                    )),
-                                  ),
-                                ),
+                                child: ReceitasButtom(
+                                    "Branca", Colors.grey.withOpacity(0.2)),
                                 onTap: () {
                                   // Botão Rceituário
                                 },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:web_interface/api/api.dart';
 import 'package:web_interface/data/data.dart';
 import 'package:web_interface/widgets/text_input.dart';
@@ -218,47 +219,93 @@ class _CadastroState extends State<Cadastro> {
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
                   var data = snapshot.data;
-                  return Container(
-                    height: 200,
-                    width: 650,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(data.toString()),
-                        // (data.toString().contains("Exception"))
-                        //     ? SelectableText("Erro: " + data.toString())
-                        //     : Column(
-                        //         mainAxisAlignment: MainAxisAlignment.start,
-                        //         children: <Widget>[
-                        //           SelectableText(
-                        //             "Concluído",
-                        //             style:
-                        //                 TextStyle(fontWeight: FontWeight.bold),
-                        //           ),
-                        //           SelectableText("ID: " + data.toString())
-                        //         ],
-                        //       ),
-                        FlatButton(
-                            color:
-                                Theme.of(context).primaryColor.withOpacity(0.1),
-                            textColor: Colors.black,
-                            child: Text('OK'),
-                            onPressed: () {
-                              _numeroReceitaController.clear();
-                              _nomePacienteController.clear();
-                              _enderecoPacienteController.clear();
-                              _nomeMedicoController.clear();
-                              _crmMedicoController.clear();
-                              _nomeMedicamentoController.clear();
-                              _quantidadeMedicamentoController.clear();
-                              _formulaMedicamentoController.clear();
-                              _doseUnidadeController.clear();
-                              _posologiaController.clear();
-                              Navigator.of(context).pop();
-                            })
-                      ],
-                    ),
-                  );
+                  if (data.toString().startsWith("Transaction")) {
+                    List qrCode = data.toString().split(".");
+                    return Container(
+                      height: 350,
+                      width: 650,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Receita cadastrada com sucesso!",
+                            style: textStyleTitulo(),
+                          ),
+                          Center(child: Text("QRCode da receita")),
+                          QrImage(
+                            data: qrCode[1],
+                            version: QrVersions.auto,
+                            size: MediaQuery.of(context).size.height * 0.15,
+                          ),
+
+                          //Contract verification falied
+
+                          // (data.toString().contains("Exception"))
+                          //     ? SelectableText("Erro: " + data.toString())
+                          //     : Column(
+                          //         mainAxisAlignment: MainAxisAlignment.start,
+                          //         children: <Widget>[
+                          //           SelectableText(
+                          //             "Concluído",
+                          //             style:
+                          //                 TextStyle(fontWeight: FontWeight.bold),
+                          //           ),
+                          //           SelectableText("ID: " + data.toString())
+                          //         ],
+                          //       ),
+                          FlatButton(
+                              color: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.1),
+                              textColor: Colors.black,
+                              child: Text('OK'),
+                              onPressed: () {
+                                _numeroReceitaController.clear();
+                                _nomePacienteController.clear();
+                                _enderecoPacienteController.clear();
+                                _nomeMedicoController.clear();
+                                _crmMedicoController.clear();
+                                _nomeMedicamentoController.clear();
+                                _quantidadeMedicamentoController.clear();
+                                _formulaMedicamentoController.clear();
+                                _doseUnidadeController.clear();
+                                _posologiaController.clear();
+                                Navigator.of(context).pop();
+                              })
+                        ],
+                      ),
+                    );
+                  } else {
+                    return Container(
+                      height: 350,
+                      width: 650,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SelectableText(
+                            "Erro no cadastro da receita",
+                            style: textStyleTitulo(),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SelectableText("Erro: " + data.toString()),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          FlatButton(
+                              color: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.1),
+                              textColor: Colors.black,
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              })
+                        ],
+                      ),
+                    );
+                  }
                 } else {
                   return Container(
                       height: 120,
@@ -272,5 +319,10 @@ class _CadastroState extends State<Cadastro> {
         );
       },
     );
+  }
+
+  textStyleTitulo() {
+    return TextStyle(
+        color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12);
   }
 }

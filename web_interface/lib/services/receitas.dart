@@ -281,71 +281,78 @@ class _ReceitasState extends State<Receitas> {
                           //Infomações dos cards da lista de receitas
                           child: CardDash(
                             //ID Receita
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["numeroReceita"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["iouReceita"]["receita"]["numeroReceita"]
                                 .toString(),
                             //Data Emissão
-                            content[index]["state"]["data"]["dataEmissao"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["dataEmissao"]
                                 .toString(),
                             //Nome Paciente
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["nomePaciente"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["iouReceita"]["receita"]["nomePaciente"]
                                 .toString(),
                             //Nome Medicamento
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["nomeMedicamento"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["iouReceita"]["receita"]["nomeMedicamento"]
                                 .toString(),
                             //QrCode Receita
-                            content[index]["state"]["data"]["linearId"]["id"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["linearId"]["id"]
                                 .toString(),
                           ),
                           //Informações da receita completa
                           onTap: () => showDetails(
                             //ID Receita
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["numeroReceita"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["iouReceita"]["receita"]["numeroReceita"]
                                 .toString(),
                             //Data Emissão
-                            content[index]["state"]["data"]["dataEmissao"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["dataEmissao"]
                                 .toString(),
                             //Nome Paciente
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["nomePaciente"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["iouReceita"]["receita"]["nomePaciente"]
                                 .toString(),
                             //Endereço do Paciente
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["enderecoPaciente"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                        ["iouReceita"]["receita"]
+                                    ["enderecoPaciente"]
                                 .toString(),
                             //Nome Médico
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["nomeMedico"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["iouReceita"]["receita"]["nomeMedico"]
                                 .toString(),
                             //CRM Médico
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["crmMedico"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["iouReceita"]["receita"]["crmMedico"]
                                 .toString(),
                             //QrCode Receita
-                            content[index]["state"]["data"]["linearId"]["id"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["linearId"]["id"]
                                 .toString(),
                             //Nome Medicamento
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["nomeMedicamento"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["iouReceita"]["receita"]["nomeMedicamento"]
                                 .toString(),
                             //Quantidade receitada do medicamento
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["quantidadeMedicamento"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                        ["iouReceita"]["receita"]
+                                    ["quantidadeMedicamento"]
                                 .toString(),
                             //Formula do medicamento
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["formulaMedicamento"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                        ["iouReceita"]["receita"]
+                                    ["formulaMedicamento"]
                                 .toString(),
                             //Dose por unidade
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["doseUnidade"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["iouReceita"]["receita"]["doseUnidade"]
                                 .toString(),
                             //Posologia
-                            content[index]["state"]["data"]["iouReceita"]
-                                    ["receita"]["posologia"]
+                            content[(_counter - 1) - index]["state"]["data"]
+                                    ["iouReceita"]["receita"]["posologia"]
                                 .toString(),
                           ),
                         ),

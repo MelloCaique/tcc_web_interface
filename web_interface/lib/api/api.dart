@@ -13,7 +13,7 @@ class ApiCollection {
   String nomeMedicamento;
   int quantidadeMedicamento;
   String formulaMedicamento;
-  String doseUnidade;
+  int doseUnidade;
   String posologia;
   int quantidadeMedVendida;
   String comprador;
@@ -23,27 +23,30 @@ class ApiCollection {
   String nomeVendedor;
   int cnpj;
 
-  ApiCollection(
-      [this.host,
-      this.port,
-      this.linearId,
-      this.numeroReceita,
-      this.nomePaciente,
-      this.enderecoPaciente,
-      this.nomeMedico,
-      this.crmMedico,
-      this.nomeMedicamento,
-      this.quantidadeMedicamento,
-      this.formulaMedicamento,
-      this.doseUnidade,
-      this.posologia,
-      this.quantidadeMedVendida,
-      this.comprador,
-      this.enderecoComprador,
-      this.rg,
-      this.telefone,
-      this.nomeVendedor,
-      this.cnpj]);
+  // this.quantidadeMedVendida,
+  // this.comprador,
+  // this.enderecoComprador,
+  // this.rg,
+  // this.telefone,
+  // this.nomeVendedor,
+  // this.cnpj
+
+  ApiCollection.listaReceitas(this.host, this.port);
+
+  ApiCollection.cadastro(
+    this.host,
+    this.port,
+    this.numeroReceita,
+    this.nomePaciente,
+    this.enderecoPaciente,
+    this.nomeMedico,
+    this.crmMedico,
+    this.nomeMedicamento,
+    this.quantidadeMedicamento,
+    this.formulaMedicamento,
+    this.doseUnidade,
+    this.posologia,
+  );
 
   ///////////////// Checar a receita através do QRcode ///////////////////
   Future<dynamic> checkQRCode() async {

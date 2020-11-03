@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class CardDash extends StatefulWidget {
-  String title;
+  String idReceita;
   String data;
   String nomePaciente;
   String nomeMedicamento;
+  String qrCode;
 
-  CardDash([this.title, this.data, this.nomePaciente, this.nomeMedicamento]);
+  CardDash(
+      [this.idReceita,
+      this.data,
+      this.nomePaciente,
+      this.nomeMedicamento,
+      this.qrCode]);
 
   @override
   _CardDashState createState() => _CardDashState();
 }
 
 class _CardDashState extends State<CardDash> {
-  String qrCodeReceita = "a3843ffd-9e81-4b0c-b9aa-52fca8307198";
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -33,7 +37,7 @@ class _CardDashState extends State<CardDash> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Text(
-                    "${widget.title}",
+                    "${widget.idReceita}",
                     style: textStyleConteudo(),
                   ),
                 ),
@@ -64,7 +68,7 @@ class _CardDashState extends State<CardDash> {
               ],
             ),
             QrImage(
-              data: qrCodeReceita,
+              data: widget.qrCode,
               version: QrVersions.auto,
               size: MediaQuery.of(context).size.height * 0.15,
             ),

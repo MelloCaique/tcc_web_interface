@@ -11,16 +11,27 @@ class Receitas extends StatefulWidget {
 }
 
 class _ReceitasState extends State<Receitas> {
-  Widget detalhesReceita = Center(child: Text("Selecione uma receita"));
-  String qrCodeReceita = "a3843ffd-9e81-4b0c-b9aa-52fca8307198";
+  Widget detalhesReceita = Center(
+      child: Container(child: Center(child: Text("Selecione uma receita"))));
 
-  showDetails(int index) {
-    //detalhesReceita = Text("Receita show $index");
+  // Gera a receita completa a partir do card selecionado
+  showDetails(
+      String idReceita,
+      String data,
+      String nomePaciente,
+      String endPaciente,
+      String nomeMedico,
+      String crmMedico,
+      String qrCode,
+      String nomeMedicamento,
+      String qteMedicamento,
+      String formulaMedicamento,
+      String doseUnidade,
+      String posologia) {
     detalhesReceita = Card(
       elevation: 10,
       child: Container(
         color: Colors.white,
-        //ThemeData().primaryColorLight,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -30,14 +41,13 @@ class _ReceitasState extends State<Receitas> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("ID Receita: ", style: textStyleTitulo()),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
-                        "$index",
+                        "$idReceita",
                         style: textStyleConteudo(),
                       ),
                     ),
@@ -48,7 +58,7 @@ class _ReceitasState extends State<Receitas> {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
-                        "23/10/2020",
+                        "$data",
                         style: textStyleConteudo(),
                       ),
                     ),
@@ -59,7 +69,7 @@ class _ReceitasState extends State<Receitas> {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
-                        "Caique",
+                        "$nomePaciente",
                         style: textStyleConteudo(),
                       ),
                     ),
@@ -70,7 +80,7 @@ class _ReceitasState extends State<Receitas> {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
-                        "Av. Júlio de Mesquita, 432, Centro",
+                        "$endPaciente",
                         style: textStyleConteudo(),
                       ),
                     ),
@@ -81,7 +91,7 @@ class _ReceitasState extends State<Receitas> {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
-                        "Rubens Neto",
+                        "$nomeMedico",
                         style: textStyleConteudo(),
                       ),
                     ),
@@ -92,7 +102,7 @@ class _ReceitasState extends State<Receitas> {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
-                        "84985733",
+                        "$crmMedico",
                         style: textStyleConteudo(),
                       ),
                     ),
@@ -126,7 +136,7 @@ class _ReceitasState extends State<Receitas> {
               Column(
                 children: [
                   QrImage(
-                    data: qrCodeReceita,
+                    data: qrCode,
                     version: QrVersions.auto,
                     size: MediaQuery.of(context).size.height * 0.15,
                   ),
@@ -134,7 +144,7 @@ class _ReceitasState extends State<Receitas> {
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      "Sibutramina",
+                      "$nomeMedicamento",
                       style: textStyleConteudo(),
                     ),
                   ),
@@ -142,7 +152,7 @@ class _ReceitasState extends State<Receitas> {
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      "60",
+                      "$qteMedicamento",
                       style: textStyleConteudo(),
                     ),
                   ),
@@ -150,7 +160,7 @@ class _ReceitasState extends State<Receitas> {
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      "Sibutramina",
+                      "$formulaMedicamento",
                       style: textStyleConteudo(),
                     ),
                   ),
@@ -158,7 +168,7 @@ class _ReceitasState extends State<Receitas> {
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      "15mg p/ cp",
+                      "$doseUnidade",
                       style: textStyleConteudo(),
                     ),
                   ),
@@ -166,7 +176,7 @@ class _ReceitasState extends State<Receitas> {
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      "1 cp à noite",
+                      "$posologia",
                       style: textStyleConteudo(),
                     ),
                   ),
@@ -224,15 +234,6 @@ class _ReceitasState extends State<Receitas> {
                       flex: 8,
                       child: Container(
                         child: updateList(),
-                        // ListView.builder(itemBuilder: (_, index) {
-                        //   return GestureDetector(
-                        //     //Tratar os dados e passar para a lista.
-                        //     child: CardDash("$index", "12/10/2020", "Caique",
-                        //         "Sibutramina"),
-                        //     //Tratar os dados e passar para a receita completa.
-                        //     onTap: () => showDetails(index),
-                        //   );
-                        // }),
                       ),
                     ),
                   ],
@@ -244,7 +245,6 @@ class _ReceitasState extends State<Receitas> {
                     child: Container(
                       width: MediaQuery.of(context).size.height * 1,
                       height: MediaQuery.of(context).size.width * 1,
-                      //color: Colors.white,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListView(
@@ -261,9 +261,10 @@ class _ReceitasState extends State<Receitas> {
     );
   }
 
+  //Faz a extração das informções da API e gera a lista de receitas
   Widget updateList() {
     return new FutureBuilder(
-        future: ApiCollection(host, port).getMyReceitas(),
+        future: ApiCollection.listaReceitas(host, port).getMyReceitas(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             var content = snapshot.data;
@@ -277,8 +278,76 @@ class _ReceitasState extends State<Receitas> {
                     return Column(
                       children: [
                         GestureDetector(
-                          child: Text(content[index].toString()),
-                          onTap: () => showDetails(index),
+                          //Infomações dos cards da lista de receitas
+                          child: CardDash(
+                            //ID Receita
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["numeroReceita"]
+                                .toString(),
+                            //Data Emissão
+                            content[index]["state"]["data"]["dataEmissao"]
+                                .toString(),
+                            //Nome Paciente
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["nomePaciente"]
+                                .toString(),
+                            //Nome Medicamento
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["nomeMedicamento"]
+                                .toString(),
+                            //QrCode Receita
+                            content[index]["state"]["data"]["linearId"]["id"]
+                                .toString(),
+                          ),
+                          //Informações da receita completa
+                          onTap: () => showDetails(
+                            //ID Receita
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["numeroReceita"]
+                                .toString(),
+                            //Data Emissão
+                            content[index]["state"]["data"]["dataEmissao"]
+                                .toString(),
+                            //Nome Paciente
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["nomePaciente"]
+                                .toString(),
+                            //Endereço do Paciente
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["enderecoPaciente"]
+                                .toString(),
+                            //Nome Médico
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["nomeMedico"]
+                                .toString(),
+                            //CRM Médico
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["crmMedico"]
+                                .toString(),
+                            //QrCode Receita
+                            content[index]["state"]["data"]["linearId"]["id"]
+                                .toString(),
+                            //Nome Medicamento
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["nomeMedicamento"]
+                                .toString(),
+                            //Quantidade receitada do medicamento
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["quantidadeMedicamento"]
+                                .toString(),
+                            //Formula do medicamento
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["formulaMedicamento"]
+                                .toString(),
+                            //Dose por unidade
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["doseUnidade"]
+                                .toString(),
+                            //Posologia
+                            content[index]["state"]["data"]["iouReceita"]
+                                    ["receita"]["posologia"]
+                                .toString(),
+                          ),
                         ),
                         Divider(),
                       ],
@@ -286,7 +355,9 @@ class _ReceitasState extends State<Receitas> {
                   }),
             );
           } else {
-            return Text("Buscando Informações no ledger");
+            return CircularProgressIndicator(
+              semanticsLabel: "Buscando Informações no ledger",
+            );
           }
         });
   }

@@ -26,24 +26,54 @@ class InputText extends StatelessWidget {
             if (value.isEmpty) {
               return "   $errorText";
             }
-            if (labelText == "ID" && int.tryParse(value) == null) {
+            if (labelText == "Número da receita" &&
+                int.tryParse(value) == null) {
               return "$labelText Inválido: Digite apenas números";
             }
-            if (labelText == "CNPJ Importador" && int.tryParse(value) == null) {
+            if (labelText == "Nome do paciente" &&
+                int.tryParse(value) != null) {
+              return "$labelText Inválido: Digite o nome da rua/av e depois o número";
+            }
+            if (labelText == "Endereço do paciente" &&
+                int.tryParse(value) != null) {
+              return "$labelText Inválido: Digite apenas letras";
+            }
+            if (labelText == "Nome do médico" && int.tryParse(value) != null) {
+              return "$labelText Inválido: Digite apenas letras";
+            }
+            if (labelText == "CRM médico" && int.tryParse(value) == null) {
               return "$labelText Inválido: Digite apenas números";
             }
-            if (labelText == "VMLD Canônico" &&
-                double.tryParse(value) == null) {
-              return "$labelText Inválido: Digite um número real. Utilizar (.) para centavos";
+            if (labelText == "Nome do medicamento" &&
+                int.tryParse(value) != null) {
+              return "$labelText Inválido: Digite apenas letras";
             }
-            if (labelText == "Porcentagem" && double.tryParse(value) == null) {
-              return "$labelText Inválido: Digite um número real. Utilizar (.) para decimais";
-            } else if (labelText == "Porcentagem" &&
-                double.tryParse(value) <= 0) {
+            if (labelText == "Fórmula do medicamento" &&
+                int.tryParse(value) != null) {
+              return "$labelText Inválido";
+            }
+            if (labelText == "Posologia" && int.tryParse(value) != null) {
+              return "$labelText Inválido";
+            }
+            if (labelText == "Quantidade de medicamento" &&
+                int.tryParse(value) == null) {
+              return "$labelText Inválido: Digite apenas números";
+            } else if (labelText == "Quantidade de medicamento" &&
+                int.tryParse(value) <= 0) {
               return "$labelText Inválido: O número deve ser MAIOR QUE ZERO";
-            } else if (labelText == "Porcentagem" &&
-                double.tryParse(value) > 100.0) {
-              return "$labelText Inválido: A porcentagem total deve ser menor que 100%, verifique a DI atual";
+            } else if (labelText == "Quantidade de medicamento" &&
+                int.tryParse(value) > 60) {
+              return "$labelText Inválido: A quantia deve ser menor que 60";
+            }
+            if (labelText == "Dose por unidade" &&
+                int.tryParse(value) == null) {
+              return "$labelText Inválido: Digite apenas números";
+            } else if (labelText == "Dose por unidade" &&
+                int.tryParse(value) <= 0) {
+              return "$labelText Inválido: O número deve ser MAIOR QUE ZERO";
+            } else if (labelText == "Dose por unidade" &&
+                int.tryParse(value) > 15) {
+              return "$labelText Inválido: A quantia deve ser menor que 15";
             }
           },
           obscureText: (obscureText == null) ? false : true,

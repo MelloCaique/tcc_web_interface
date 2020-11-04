@@ -12,7 +12,13 @@ class Receitas extends StatefulWidget {
 
 class _ReceitasState extends State<Receitas> {
   Widget detalhesReceita = Center(
-      child: Container(child: Center(child: Text("Selecione uma receita"))));
+      child: Container(
+          child: Center(
+              child: Text(
+    "Selecione uma receita",
+    style: TextStyle(
+        color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14),
+  ))));
 
   // Gera a receita completa a partir do card selecionado
   showDetails(
@@ -217,7 +223,7 @@ class _ReceitasState extends State<Receitas> {
               Flexible(
                 flex: 1,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Flexible(
                         flex: 1,
@@ -362,8 +368,10 @@ class _ReceitasState extends State<Receitas> {
                   }),
             );
           } else {
-            return CircularProgressIndicator(
-              semanticsLabel: "Buscando Informações no ledger",
+            return Center(
+              child: CircularProgressIndicator(
+                semanticsLabel: "Buscando Informações no ledger",
+              ),
             );
           }
         });

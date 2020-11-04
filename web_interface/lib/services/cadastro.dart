@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:web_interface/api/api.dart';
 import 'package:web_interface/data/data.dart';
@@ -237,22 +236,6 @@ class _CadastroState extends State<Cadastro> {
                             version: QrVersions.auto,
                             size: MediaQuery.of(context).size.height * 0.15,
                           ),
-
-                          //Contract verification falied
-
-                          // (data.toString().contains("Exception"))
-                          //     ? SelectableText("Erro: " + data.toString())
-                          //     : Column(
-                          //         mainAxisAlignment: MainAxisAlignment.start,
-                          //         children: <Widget>[
-                          //           SelectableText(
-                          //             "Concluído",
-                          //             style:
-                          //                 TextStyle(fontWeight: FontWeight.bold),
-                          //           ),
-                          //           SelectableText("ID: " + data.toString())
-                          //         ],
-                          //       ),
                           FlatButton(
                               color: Theme.of(context)
                                   .primaryColor

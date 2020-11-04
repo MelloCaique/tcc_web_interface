@@ -115,33 +115,53 @@ class _MenuState extends State<Menu> {
           ],
         )),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).primaryColor.withOpacity(0.9),
-        unselectedItemColor: Colors.black,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            title: Text(
-              'Banco de Receitas',
-              style: TextStyle(fontWeight: FontWeight.w600),
+      bottomNavigationBar: (instituicao == "Consultório A")
+          ? BottomNavigationBar(
+              backgroundColor: Theme.of(context).primaryColor.withOpacity(0.9),
+              unselectedItemColor: Colors.black,
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.dashboard),
+                  title: Text(
+                    'Banco de Receitas',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.app_registration),
+                  title: Text(
+                    'Cadastro',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                )
+              ],
+              currentIndex: _selectedIndex,
+              onTap: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              selectedItemColor: Colors.white,
+            )
+          : Container(
+              height: 60,
+              color: Theme.of(context).primaryColor.withOpacity(0.9),
+              child: InkWell(
+                onTap: () => null,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Icon(Icons.dashboard),
+                      Text(
+                        'Banco de Receitas',
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.app_registration),
-            title: Text(
-              'Cadastro',
-              style: TextStyle(fontWeight: FontWeight.w600),
-            ),
-          )
-        ],
-        currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        selectedItemColor: Colors.white,
-      ),
     );
   }
 

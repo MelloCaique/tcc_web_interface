@@ -33,11 +33,67 @@ class _ReceitasState extends State<Receitas> {
       String qteMedicamento,
       String formulaMedicamento,
       String doseUnidade,
-      String posologia) {
+      String posologia,
+      List compradorVendedor) {
+    seperarComprador() {
+      List data = compradorVendedor;
+      String todosCompradores = "";
+      if (data[0].toString() == "Medicamento não comprado") {
+        return "Medicamento não comprado";
+      } else {
+        for (int i = 0; i < data.length; i++) {
+          todosCompradores = todosCompradores +
+              "Quantidade Vendida: " +
+              data[i]["quantidadeMedVendida"].toString() +
+              "\n" +
+              "Nome: " +
+              data[i]["comprador"].toString() +
+              "\n" +
+              "Endereço: " +
+              data[i]["enderecoComprador"].toString() +
+              "\n" +
+              "RG: " +
+              data[i]["rg"].toString() +
+              "\n" +
+              "Telefone: " +
+              data[i]["telefone"].toString() +
+              "\n" +
+              "\n";
+        }
+        return todosCompradores;
+      }
+    }
+
+    seperarVendedor() {
+      List data = compradorVendedor;
+      String todosCompradores = "";
+      if (data[0].toString() == "Medicamento não comprado") {
+        return "Medicamento não comprado";
+      } else {
+        for (int i = 0; i < data.length; i++) {
+          todosCompradores = todosCompradores +
+              "\n" +
+              "Quantidade Vendida: " +
+              data[i]["quantidadeMedVendida"].toString() +
+              "\n" +
+              "Nome: " +
+              data[i]["nomeVendedor"].toString() +
+              "\n" +
+              "cnpj: " +
+              data[i]["cnpj"].toString() +
+              "\n" +
+              "data: " +
+              getLastData(data[i]["data"].toString()) +
+              "\n";
+        }
+        return todosCompradores;
+      }
+    }
+
     detalhesReceita = Card(
       elevation: 10,
       child: Container(
-        color: Colors.white,
+        color: ThemeData().primaryColorLight,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -52,23 +108,23 @@ class _ReceitasState extends State<Receitas> {
                     Text("ID Receita: ", style: textStyleTitulo()),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Text(
+                      child: SelectableText(
                         "$idReceita",
                         style: textStyleConteudo(),
                       ),
                     ),
-                    Text(
+                    SelectableText(
                       "Data: ",
                       style: textStyleTitulo(),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Text(
+                      child: SelectableText(
                         "$data",
                         style: textStyleConteudo(),
                       ),
                     ),
-                    Text(
+                    SelectableText(
                       "Nome Paciente: ",
                       style: textStyleTitulo(),
                     ),
@@ -79,60 +135,60 @@ class _ReceitasState extends State<Receitas> {
                         style: textStyleConteudo(),
                       ),
                     ),
-                    Text(
+                    SelectableText(
                       "Endereço do Paciente: ",
                       style: textStyleTitulo(),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Text(
+                      child: SelectableText(
                         "$endPaciente",
                         style: textStyleConteudo(),
                       ),
                     ),
-                    Text(
+                    SelectableText(
                       "Nome Médico",
                       style: textStyleTitulo(),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Text(
+                      child: SelectableText(
                         "$nomeMedico",
                         style: textStyleConteudo(),
                       ),
                     ),
-                    Text(
+                    SelectableText(
                       "CRM Médico:",
                       style: textStyleTitulo(),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Text(
+                      child: SelectableText(
                         "$crmMedico",
                         style: textStyleConteudo(),
                       ),
                     ),
                     Divider(),
-                    Text(
+                    SelectableText(
                       "Dados do comprador:",
                       style: textStyleTitulo(),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        "Qte medicamendo vendida: 30 \n Comprador: Fernanda \n Endereço: Av. Carvalho, 123, jd. paulista \n RG: 985734758 \n Telefone: 74776884",
+                      child: SelectableText(
+                        seperarComprador(),
                         style: textStyleConteudo(),
                       ),
                     ),
                     Divider(),
-                    Text(
+                    SelectableText(
                       "Dados do Vendedor",
                       style: textStyleTitulo(),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        "Vendedor: Pedro \n CNPJ: 129387584 \n Data: 23/10/2020",
+                      child: SelectableText(
+                        seperarVendedor(),
                         style: textStyleConteudo(),
                       ),
                     ),
@@ -146,42 +202,47 @@ class _ReceitasState extends State<Receitas> {
                     version: QrVersions.auto,
                     size: MediaQuery.of(context).size.height * 0.15,
                   ),
-                  Text("Nome medicamento: ", style: textStyleTitulo()),
+                  SelectableText(qrCode),
+                  SelectableText("Nome medicamento: ",
+                      style: textStyleTitulo()),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    child: Text(
+                    child: SelectableText(
                       "$nomeMedicamento",
                       style: textStyleConteudo(),
                     ),
                   ),
-                  Text("Quantidade do medicamento: ", style: textStyleTitulo()),
+                  SelectableText("Quantidade do medicamento: ",
+                      style: textStyleTitulo()),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    child: Text(
+                    child: SelectableText(
                       "$qteMedicamento",
                       style: textStyleConteudo(),
                     ),
                   ),
-                  Text("Formula do Medicamento: ", style: textStyleTitulo()),
+                  SelectableText("Formula do Medicamento: ",
+                      style: textStyleTitulo()),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    child: Text(
+                    child: SelectableText(
                       "$formulaMedicamento",
                       style: textStyleConteudo(),
                     ),
                   ),
-                  Text("Dose por unidade: ", style: textStyleTitulo()),
+                  SelectableText("Dose por unidade: ",
+                      style: textStyleTitulo()),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    child: Text(
+                    child: SelectableText(
                       "$doseUnidade",
                       style: textStyleConteudo(),
                     ),
                   ),
-                  Text("Posologia: ", style: textStyleTitulo()),
+                  SelectableText("Posologia: ", style: textStyleTitulo()),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    child: Text(
+                    child: SelectableText(
                       "$posologia",
                       style: textStyleConteudo(),
                     ),
@@ -206,7 +267,7 @@ class _ReceitasState extends State<Receitas> {
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
+              child: SelectableText(
                 'Banco de receita AZUL',
                 style: TextStyle(
                     color: Colors.black,
@@ -230,7 +291,7 @@ class _ReceitasState extends State<Receitas> {
                         child: Container(
                             width: MediaQuery.of(context).size.width * 1,
                             color: Colors.grey.shade300,
-                            child: Text(
+                            child: SelectableText(
                               "Lista de receitas",
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -270,7 +331,7 @@ class _ReceitasState extends State<Receitas> {
   //Faz a extração das informções da API e gera a lista de receitas
   Widget updateList() {
     return new FutureBuilder(
-        future: ApiCollection.listaReceitas(host, port).getMyReceitas(),
+        future: ApiCollection.listaReceitas(host, port).getAllReceitas(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             var content = snapshot.data;
@@ -281,6 +342,19 @@ class _ReceitasState extends State<Receitas> {
                   physics: index,
                   itemCount: _counter,
                   itemBuilder: (BuildContext context, int index) {
+                    String dataAjustada = getLastData(
+                        content[(_counter - 1) - index]["state"]["data"]
+                                ["dataEmissao"]
+                            .toString());
+                    List compradoresVendedores =
+                        (content[(_counter - 1) - index]["state"]["data"]
+                                        ["iouVenda"]
+                                    .toString() ==
+                                "null")
+                            ? ["Medicamento não comprado"]
+                            : content[(_counter - 1) - index]["state"]["data"]
+                                ["iouVenda"]["venda"];
+
                     return Column(
                       children: [
                         GestureDetector(
@@ -309,58 +383,41 @@ class _ReceitasState extends State<Receitas> {
                           ),
                           //Informações da receita completa
                           onTap: () => showDetails(
-                            //ID Receita
-                            content[(_counter - 1) - index]["state"]["data"]
-                                    ["iouReceita"]["receita"]["numeroReceita"]
-                                .toString(),
-                            //Data Emissão
-                            content[(_counter - 1) - index]["state"]["data"]
-                                    ["dataEmissao"]
-                                .toString(),
-                            //Nome Paciente
-                            content[(_counter - 1) - index]["state"]["data"]
-                                    ["iouReceita"]["receita"]["nomePaciente"]
-                                .toString(),
-                            //Endereço do Paciente
-                            content[(_counter - 1) - index]["state"]["data"]
-                                        ["iouReceita"]["receita"]
-                                    ["enderecoPaciente"]
-                                .toString(),
-                            //Nome Médico
-                            content[(_counter - 1) - index]["state"]["data"]
-                                    ["iouReceita"]["receita"]["nomeMedico"]
-                                .toString(),
-                            //CRM Médico
-                            content[(_counter - 1) - index]["state"]["data"]
-                                    ["iouReceita"]["receita"]["crmMedico"]
-                                .toString(),
-                            //QrCode Receita
-                            content[(_counter - 1) - index]["state"]["data"]
-                                    ["linearId"]["id"]
-                                .toString(),
-                            //Nome Medicamento
-                            content[(_counter - 1) - index]["state"]["data"]
-                                    ["iouReceita"]["receita"]["nomeMedicamento"]
-                                .toString(),
-                            //Quantidade receitada do medicamento
-                            content[(_counter - 1) - index]["state"]["data"]
-                                        ["iouReceita"]["receita"]
-                                    ["quantidadeMedicamento"]
-                                .toString(),
-                            //Formula do medicamento
-                            content[(_counter - 1) - index]["state"]["data"]
-                                        ["iouReceita"]["receita"]
-                                    ["formulaMedicamento"]
-                                .toString(),
-                            //Dose por unidade
-                            content[(_counter - 1) - index]["state"]["data"]
-                                    ["iouReceita"]["receita"]["doseUnidade"]
-                                .toString(),
-                            //Posologia
-                            content[(_counter - 1) - index]["state"]["data"]
-                                    ["iouReceita"]["receita"]["posologia"]
-                                .toString(),
-                          ),
+                              //ID Receita
+                              content[(_counter - 1) - index]["state"]["data"]
+                                      ["iouReceita"]["receita"]["numeroReceita"]
+                                  .toString(),
+                              //Data Emissão
+                              dataAjustada,
+                              //Nome Paciente
+                              content[(_counter - 1) - index]["state"]["data"]
+                                      ["iouReceita"]["receita"]["nomePaciente"]
+                                  .toString(),
+                              //Endereço do Paciente
+                              content[(_counter - 1) - index]["state"]["data"]["iouReceita"]
+                                      ["receita"]["enderecoPaciente"]
+                                  .toString(),
+                              //Nome Médico
+                              content[(_counter - 1) - index]["state"]["data"]
+                                      ["iouReceita"]["receita"]["nomeMedico"]
+                                  .toString(),
+                              //CRM Médico
+                              content[(_counter - 1) - index]["state"]["data"]
+                                      ["iouReceita"]["receita"]["crmMedico"]
+                                  .toString(),
+                              //QrCode Receita
+                              content[(_counter - 1) - index]["state"]["data"]["linearId"]["id"].toString(),
+                              //Nome Medicamento
+                              content[(_counter - 1) - index]["state"]["data"]["iouReceita"]["receita"]["nomeMedicamento"].toString(),
+                              //Quantidade receitada do medicamento
+                              content[(_counter - 1) - index]["state"]["data"]["iouReceita"]["receita"]["quantidadeMedicamento"].toString(),
+                              //Formula do medicamento
+                              content[(_counter - 1) - index]["state"]["data"]["iouReceita"]["receita"]["formulaMedicamento"].toString(),
+                              //Dose por unidade
+                              content[(_counter - 1) - index]["state"]["data"]["iouReceita"]["receita"]["doseUnidade"].toString(),
+                              //Posologia
+                              content[(_counter - 1) - index]["state"]["data"]["iouReceita"]["receita"]["posologia"].toString(),
+                              compradoresVendedores),
                         ),
                         Divider(),
                       ],
@@ -369,12 +426,34 @@ class _ReceitasState extends State<Receitas> {
             );
           } else {
             return Center(
-              child: CircularProgressIndicator(
-                semanticsLabel: "Buscando Informações no ledger",
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    semanticsLabel: "Buscando Informações no ledger",
+                  ),
+                  SelectableText("Buscando Informações no ledger")
+                ],
               ),
             );
           }
         });
+  }
+
+  ajustData(String data) {
+    String dataString = "";
+    List listData = data.split("-").toList();
+    listData.reversed.toList().forEach((element) {
+      dataString = listData.reversed.toList().join("/");
+    });
+    return dataString;
+  }
+
+  getLastData(String dataJson) {
+    String data = dataJson;
+    String dia = ajustData(data.substring(0, data.indexOf("T")));
+    String hora = data.substring((data.indexOf("T") + 1), data.indexOf("."));
+    return "$dia às $hora";
   }
 
   textStyleTitulo() {

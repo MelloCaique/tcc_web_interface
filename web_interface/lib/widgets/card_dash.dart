@@ -20,6 +20,26 @@ class CardDash extends StatefulWidget {
 }
 
 class _CardDashState extends State<CardDash> {
+  ajustData(String data) {
+    String dataString = "";
+    List listData = data.split("-").toList();
+    listData.reversed.toList().forEach((element) {
+      dataString = listData.reversed.toList().join("/");
+    });
+    return dataString;
+  }
+
+  getLastData() {
+    String data = widget.data;
+    String dia = ajustData(data.substring(0, data.indexOf("T")));
+    String hora = data.substring((data.indexOf("T") + 1), data.indexOf("."));
+    return SelectableText(
+      "$dia às $hora",
+      style: textStyleConteudo(),
+      textAlign: TextAlign.center,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -33,23 +53,20 @@ class _CardDashState extends State<CardDash> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("ID Receita: ", style: textStyleTitulo()),
+                SelectableText("ID Receita: ", style: textStyleTitulo()),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
-                  child: Text(
+                  child: SelectableText(
                     "${widget.idReceita}",
                     style: textStyleConteudo(),
                   ),
                 ),
-                Text("Data: ", style: textStyleTitulo()),
+                SelectableText("Data: ", style: textStyleTitulo()),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
-                  child: Text(
-                    "${widget.data}",
-                    style: textStyleConteudo(),
-                  ),
+                  child: getLastData(),
                 ),
-                Text("Nome Paciente: ", style: textStyleTitulo()),
+                SelectableText("Nome Paciente: ", style: textStyleTitulo()),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Text(
@@ -57,10 +74,10 @@ class _CardDashState extends State<CardDash> {
                     style: textStyleConteudo(),
                   ),
                 ),
-                Text("Nome Paciente: ", style: textStyleTitulo()),
+                SelectableText("Nome Paciente: ", style: textStyleTitulo()),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
-                  child: Text(
+                  child: SelectableText(
                     "${widget.nomeMedicamento}",
                     style: textStyleConteudo(),
                   ),

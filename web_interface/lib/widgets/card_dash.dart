@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class CardDash extends StatefulWidget {
-  String idReceita;
-  String data;
-  String nomePaciente;
-  String nomeMedicamento;
-  String qrCode;
+  final String idReceita;
+  final String data;
+  final String nomePaciente;
+  final String nomeMedicamento;
+  final String qrCode;
 
   CardDash(
       [this.idReceita,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ReceitasButtom extends StatelessWidget {
-  String label;
-  Color color;
+  final String label;
+  final Color color;
   ReceitasButtom([this.label, this.color]);
 
   @override

@@ -116,24 +116,18 @@ class _MenuState extends State<Menu> {
         )),
       ),
       bottomNavigationBar: (instituicao == "Consultório A")
-          ? BottomNavigationBar(
+          ?
+          // Serviços para consultórios
+          BottomNavigationBar(
               backgroundColor: Theme.of(context).primaryColor.withOpacity(0.9),
               unselectedItemColor: Colors.black,
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(Icons.dashboard),
-                  title: Text(
-                    'Banco de Receitas',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
+                  label: "Banco de Receitas",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.app_registration),
-                  title: Text(
-                    'Cadastro',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                )
+                    icon: Icon(Icons.app_registration), label: "Cadastro")
               ],
               currentIndex: _selectedIndex,
               onTap: (index) {
@@ -143,7 +137,9 @@ class _MenuState extends State<Menu> {
               },
               selectedItemColor: Colors.white,
             )
-          : Container(
+          :
+          // Serviços para farmácias
+          Container(
               height: 60,
               color: Theme.of(context).primaryColor.withOpacity(0.9),
               child: InkWell(

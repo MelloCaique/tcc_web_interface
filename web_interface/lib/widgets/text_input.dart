@@ -22,6 +22,7 @@ class InputText extends StatelessWidget {
         padding: const EdgeInsets.all(3.0),
         child: TextFormField(
           controller: controller,
+          // ignore: missing_return
           validator: (value) {
             if (value.isEmpty) {
               return "   $errorText";

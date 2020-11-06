@@ -331,7 +331,7 @@ class _ReceitasState extends State<Receitas> {
   //Faz a extração das informções da API e gera a lista de receitas
   Widget updateList() {
     return new FutureBuilder(
-        future: ApiCollection.listaReceitas(host, port).getAllReceitas(),
+        future: ApiCollection.listaReceitas(host, port).getMyReceitas(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             var content = snapshot.data;

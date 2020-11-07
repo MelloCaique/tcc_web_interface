@@ -118,7 +118,8 @@ class _LoginState extends State<Login> {
                                                 BorderRadius.circular(10),
                                             elevation: 0,
                                             child: DropdownButtonFormField(
-                                              hint: Text('SELECIONE O BANCO'),
+                                              hint: Text(
+                                                  'SELECIONE A INSTITUIÇÃO'),
                                               value: dropDownValue,
                                               icon: Icon(Icons.arrow_downward),
                                               iconSize: 20,
@@ -173,9 +174,9 @@ class _LoginState extends State<Login> {
                                           flex: 3,
                                           child: InputText(
                                               _passwordController,
-                                              "Password",
+                                              "Senha",
                                               "12345",
-                                              "Inválido: Password não preenchido",
+                                              "Inválido: Senha não preenchida",
                                               true)),
                                     ],
                                   ),

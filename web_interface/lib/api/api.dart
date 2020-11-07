@@ -48,6 +48,8 @@ class ApiCollection {
     this.posologia,
   );
 
+  ApiCollection.checkReceita(this.host, this.port, this.linearId);
+
   ///////////////// Checar a receita através do QRcode ///////////////////
   Future<dynamic> checkQRCode() async {
     final String url = "http://$host:$port/api/example/check-receita";

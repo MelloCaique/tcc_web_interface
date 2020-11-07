@@ -105,7 +105,7 @@ class _CadastroState extends State<Cadastro> {
                               _formulaMedicamentoController,
                               "Fórmula do medicamento",
                               "Ex.:Sbtr",
-                              "Fprmula inválida"),
+                              "Fórmula inválida"),
                           SizedBox(height: 10),
                           InputText(_doseUnidadeController, "Dose por unidade",
                               "Ex.:10", "Dose inválida"),

@@ -348,8 +348,13 @@ class _VendaState extends State<Venda> {
                       height: 120,
                       width: 650,
                       child: Center(
-                          child: CircularProgressIndicator(
-                        semanticsLabel: "Pesquisando receita. Aguarde.",
+                          child: Column(
+                        children: [
+                          CircularProgressIndicator(
+                            semanticsLabel: "Pesquisando receita. Aguarde.",
+                          ),
+                          SelectableText("Pesquisando receita. Aguarde."),
+                        ],
                       )));
                 }
               }),
@@ -359,7 +364,121 @@ class _VendaState extends State<Venda> {
   }
 
   venda() {
-    print("vender");
+    showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          elevation: 3,
+          backgroundColor: Colors.white,
+          title: SelectableText("Cadastro de venda de receita B2"),
+          content: FutureBuilder(
+              future: ApiCollection.vendaReceita(
+                      host,
+                      port,
+                      linearId,
+                      quantidadeMedVendida,
+                      comprador,
+                      enderecoComprador,
+                      rg,
+                      telefone,
+                      nomeVendedor,
+                      cnpj)
+                  .vendaReceita(),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.hasData) {
+                  var data = snapshot.data;
+                  if (data.toString().startsWith("Transaction")) {
+                    return Container(
+                      height: 350,
+                      width: 650,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Venda cadastrada com sucesso",
+                            style: textStyleTitulo(),
+                          ),
+                          Text(
+                            data.toString(),
+                          ),
+                          FlatButton(
+                              color: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.1),
+                              textColor: Colors.black,
+                              child: Text('OK'),
+                              onPressed: () {
+                                setState(() {
+                                  _linearIdController.clear();
+                                  _quantidadeMedVendidaController.clear();
+                                  _compradorController.clear();
+                                  _enderecoCompradorController.clear();
+                                  _rgController.clear();
+                                  _telefoneController.clear();
+                                  _nomeVendedorController.clear();
+                                  _cnpjController.clear();
+                                  statusVenda = false;
+                                });
+                                Navigator.of(context).pop();
+                              })
+                        ],
+                      ),
+                    );
+                  } else {
+                    return Container(
+                      height: 350,
+                      width: 650,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SelectableText(
+                            "Erro ao cadastrar a venda",
+                            style: textStyleTitulo(),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SelectableText(data.toString()),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          FlatButton(
+                              color: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.1),
+                              textColor: Colors.black,
+                              child: Text('OK'),
+                              onPressed: () {
+                                setState(() {
+                                  statusVenda = true;
+                                });
+                                Navigator.of(context).pop();
+                              })
+                        ],
+                      ),
+                    );
+                  }
+                } else {
+                  return Container(
+                      height: 120,
+                      width: 650,
+                      child: Center(
+                          child: Column(
+                        children: [
+                          CircularProgressIndicator(
+                            semanticsLabel:
+                                "Cadastrando venda da receita. Aguarde.",
+                          ),
+                          SelectableText(
+                              "Cadastrando venda da receita. Aguarde.")
+                        ],
+                      )));
+                }
+              }),
+        );
+      },
+    );
   }
 
   textStyleTitulo() {

@@ -23,14 +23,6 @@ class ApiCollection {
   String nomeVendedor;
   int cnpj;
 
-  // this.quantidadeMedVendida,
-  // this.comprador,
-  // this.enderecoComprador,
-  // this.rg,
-  // this.telefone,
-  // this.nomeVendedor,
-  // this.cnpj
-
   ApiCollection.listaReceitas(this.host, this.port);
 
   ApiCollection.cadastro(
@@ -49,6 +41,18 @@ class ApiCollection {
   );
 
   ApiCollection.checkReceita(this.host, this.port, this.linearId);
+
+  ApiCollection.vendaReceita(
+      this.host,
+      this.port,
+      this.linearId,
+      this.quantidadeMedVendida,
+      this.comprador,
+      this.enderecoComprador,
+      this.rg,
+      this.telefone,
+      this.nomeVendedor,
+      this.cnpj);
 
   ///////////////// Checar a receita através do QRcode ///////////////////
   Future<dynamic> checkQRCode() async {

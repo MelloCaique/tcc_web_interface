@@ -31,24 +31,27 @@ class InputText extends StatelessWidget {
                 int.tryParse(value) == null) {
               return "$labelText Inválido: Digite apenas números";
             }
-            if (labelText == "Nome do paciente" &&
+            if ((labelText == "Nome do paciente" ||
+                    labelText == "Nome do comprador" ||
+                    labelText == "Nome do medicamento" ||
+                    labelText == "Nome do médico" ||
+                    labelText == "Nome do vendedor") &&
+                int.tryParse(value) != null) {
+              return "$labelText Inválido: Digite apenas letras";
+            }
+            if ((labelText == "Endereço do paciente" ||
+                    labelText == "Endereço do comprador") &&
                 int.tryParse(value) != null) {
               return "$labelText Inválido: Digite o nome da rua/av e depois o número";
             }
-            if (labelText == "Endereço do paciente" &&
-                int.tryParse(value) != null) {
-              return "$labelText Inválido: Digite apenas letras";
-            }
-            if (labelText == "Nome do médico" && int.tryParse(value) != null) {
-              return "$labelText Inválido: Digite apenas letras";
-            }
-            if (labelText == "CRM médico" && int.tryParse(value) == null) {
+            if ((labelText == "CRM médico" ||
+                    labelText == "Telefone comprador" ||
+                    labelText == "CNPJ Vendedor" ||
+                    labelText == "RG do comprador") &&
+                int.tryParse(value) == null) {
               return "$labelText Inválido: Digite apenas números";
             }
-            if (labelText == "Nome do medicamento" &&
-                int.tryParse(value) != null) {
-              return "$labelText Inválido: Digite apenas letras";
-            }
+
             if (labelText == "Fórmula do medicamento" &&
                 int.tryParse(value) != null) {
               return "$labelText Inválido";
@@ -56,7 +59,8 @@ class InputText extends StatelessWidget {
             if (labelText == "Posologia" && int.tryParse(value) != null) {
               return "$labelText Inválido";
             }
-            if (labelText == "Quantidade de medicamento" &&
+            if ((labelText == "Quantidade de medicamento" ||
+                    labelText == "Quantidade de venda do medicamento") &&
                 int.tryParse(value) == null) {
               return "$labelText Inválido: Digite apenas números";
             } else if (labelText == "Quantidade de medicamento" &&

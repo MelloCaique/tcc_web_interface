@@ -294,8 +294,13 @@ class _CadastroState extends State<Cadastro> {
                       height: 120,
                       width: 650,
                       child: Center(
-                          child: CircularProgressIndicator(
-                        semanticsLabel: "Cadastrando receita. Aguarde.",
+                          child: Column(
+                        children: [
+                          CircularProgressIndicator(
+                            semanticsLabel: "Cadastrando receita. Aguarde.",
+                          ),
+                          SelectableText("Cadastrando receita. Aguarde.")
+                        ],
                       )));
                 }
               }),

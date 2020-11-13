@@ -272,7 +272,10 @@ class _CadastroState extends State<Cadastro> {
                           SizedBox(
                             height: 10,
                           ),
-                          SelectableText("Erro: " + data.toString()),
+                          SelectableText(
+                            "Erro: " + data.toString(),
+                            textAlign: TextAlign.center,
+                          ),
                           SizedBox(
                             height: 10,
                           ),
@@ -311,6 +314,6 @@ class _CadastroState extends State<Cadastro> {
 
   textStyleTitulo() {
     return TextStyle(
-        color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12);
+        color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20);
   }
 }

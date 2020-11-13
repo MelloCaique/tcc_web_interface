@@ -263,6 +263,9 @@ class _VendaState extends State<Venda> {
                               textColor: Colors.black,
                               child: Text('OK'),
                               onPressed: () {
+                                setState(() {
+                                  statusVenda = true;
+                                });
                                 Navigator.of(context).pop();
                               })
                         ],
@@ -295,6 +298,9 @@ class _VendaState extends State<Venda> {
                               textColor: Colors.black,
                               child: Text('OK'),
                               onPressed: () {
+                                setState(() {
+                                  statusVenda = false;
+                                });
                                 Navigator.of(context).pop();
                               })
                         ],
@@ -326,6 +332,9 @@ class _VendaState extends State<Venda> {
                               textColor: Colors.black,
                               child: Text('OK'),
                               onPressed: () {
+                                setState(() {
+                                  statusVenda = false;
+                                });
                                 Navigator.of(context).pop();
                               })
                         ],
